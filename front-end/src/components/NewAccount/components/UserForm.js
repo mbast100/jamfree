@@ -1,4 +1,4 @@
-import { TextField, Grid, makeStyles } from "@material-ui/core";
+import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -13,47 +13,67 @@ export default function UserForm() {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
+  const submit = () => {
+    if (firstName && lastName && email && phoneNumber) {
+      let data = {
+        frist_name: firstName,
+        last_name: lastName,
+        email: email,
+        phone_number: phoneNumber,
+        password: password,
+      };
+      console.log("request data: ", data);
+    }
+  };
   return (
     <div style={{ padding: "20px" }}>
-      <Grid container direction="column">
-        <Grid item className={classes.item}>
-          <TextField
-            onChange={(event) => setFirstName(event.target.value)}
-            value={firstName}
-            fullWidth
-            variant="outlined"
-            label="First Name"
-          />
+      <form>
+        <Grid container direction="column">
+          <Grid item className={classes.item}>
+            <TextField
+              onChange={(event) => setFirstName(event.target.value)}
+              value={firstName}
+              fullWidth
+              variant="outlined"
+              label="First Name"
+            />
+          </Grid>
+          <Grid item className={classes.item}>
+            <TextField
+              onChange={(event) => setLastName(event.target.value)}
+              value={lastName}
+              fullWidth
+              variant="outlined"
+              label="Last Name"
+            />
+          </Grid>
+          <Grid item item className={classes.item}>
+            <TextField
+              onChange={(event) => setEmail(event.target.value)}
+              value={email}
+              fullWidth
+              label="Email"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item item className={classes.item}>
+            <TextField
+              onChange={(event) => setPhoneNumber(event.target.value)}
+              value={phoneNumber}
+              fullWidth
+              label="Phone Number"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item style={{ marginTop: "10px" }}>
+            <Button onClick={submit} variant="contained" color="primary">
+              Create
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item className={classes.item}>
-          <TextField
-            onChange={(event) => setLastName(event.target.value)}
-            value={lastName}
-            fullWidth
-            variant="outlined"
-            label="Last Name"
-          />
-        </Grid>
-        <Grid item item className={classes.item}>
-          <TextField
-            onChange={(event) => setEmail(event.target.value)}
-            value={email}
-            fullWidth
-            label="Email"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid item item className={classes.item}>
-          <TextField
-            onChange={(event) => setPhoneNumber(event.target.value)}
-            value={phoneNumber}
-            fullWidth
-            label="Phone Number"
-            variant="outlined"
-          />
-        </Grid>
-      </Grid>
+      </form>
     </div>
   );
 }

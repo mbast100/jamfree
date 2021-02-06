@@ -27,7 +27,7 @@ export default function NewAccount() {
   }
   const NewUserForm = (accountType === 'user') && (<UserForm/>);
   const OrgForm = (accountType === 'organization') && (<OrganizationForm/>);
-
+  
   return (
     <div style={{margin:"auto", marginTop:"200px"}} >
         <Card className={classes.root}>
