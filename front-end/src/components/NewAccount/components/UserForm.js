@@ -80,7 +80,7 @@ export default function UserForm() {
               variant="outlined"
             />
           </Grid>
-          <Grid item style={{ marginTop: "10px" }}>
+          <Grid item style={{ marginTop: "20px" }}>
             <Button onClick={submit} variant="contained" color="primary">
               Create
             </Button>

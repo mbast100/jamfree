@@ -11,7 +11,8 @@ export default function Welcome() {
           <WelcomeNav/>
         </Grid>
         <Grid item>
-          <h1>Welcome to free Jam</h1>
+          <h2>Welcome to</h2>
+          <h1> JamFree</h1>
         </Grid>
         <Grid item>
           <NewAccount />

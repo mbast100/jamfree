@@ -173,7 +173,7 @@ export default function WelcomeNav() {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button onClick={()=>history.push('/login')} >LOGIN</Button>
+            <Button onClick={()=>history.push('/login')} variant="contained" color="primary" >LOGIN</Button>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

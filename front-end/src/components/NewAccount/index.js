@@ -29,13 +29,13 @@ export default function NewAccount() {
   const OrgForm = (accountType === 'organization') && (<OrganizationForm/>);
   
   return (
-    <div style={{margin:"auto", marginTop:"200px"}} >
+    <div style={{margin:"auto", marginTop:"20px"}} >
         <Card className={classes.root}>
           <MenuTabs onMenuChange={onMenuChange} />
           {NewUserForm}
           {OrgForm}
           <div style={{paddingBottom:"20px"}}>
-            <a href="/login" >sign in?</a>
+            <a href="/login" >Already have an account? Sign in</a>
           </div>
         </Card>`
     </div>
