@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
+import api from "../../../api";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -14,6 +17,7 @@ export default function OrganizationForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const submit = () => {
     if (restaurantName && email && phoneNumber && password) {
@@ -22,8 +26,15 @@ export default function OrganizationForm() {
         email: email,
         address: address,
         phone_number: phoneNumber,
+        password: password,
       };
-      console.log("request data: ", data);
+      api.newOrganizationAccount(data).then((res)=>{
+        if(res.status === 200){
+          Cookies.set('userId',res.data.id)
+          Cookies.set('userType', 'organization')
+          history.push('/home')
+        }
+      })
     }
   };
   return (
@@ -69,6 +80,7 @@ export default function OrganizationForm() {
           </Grid>
           <Grid item item className={classes.item}>
             <TextField
+              type="password"
               onChange={(event) => setPassword(event.target.value)}
               value={password}
               fullWidth

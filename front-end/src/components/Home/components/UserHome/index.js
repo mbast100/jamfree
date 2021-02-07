@@ -7,7 +7,7 @@ export default function UserHome(props) {
     <div>
       <h2>User</h2>
       <div>
-        <UserQrCode id={id} />
+        <UserQrCode />
       </div>
     </div>
   );
