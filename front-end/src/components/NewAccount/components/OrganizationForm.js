@@ -89,7 +89,7 @@ export default function OrganizationForm() {
             />
           </Grid>
           <Grid item style={{ marginTop: "10px" }}>
-            <Button onClick={submit} variant="contained" color="primary">
+            <Button onClick={submit} onClick={()=>history.push('/login')} variant="contained" color="primary">
               Create
             </Button>
           </Grid>

@@ -1,6 +1,7 @@
 import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
 import React from "react";
 import api from "../../../api";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -15,6 +16,7 @@ export default function UserForm() {
   const [email, setEmail] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const history = useHistory();
 
   const submit = () => {
     if (firstName && lastName && email && phoneNumber) {
@@ -81,7 +83,7 @@ export default function UserForm() {
             />
           </Grid>
           <Grid item style={{ marginTop: "20px" }}>
-            <Button onClick={submit} variant="contained" color="primary">
+            <Button onClick={submit} onClick={()=>history.push('/login')} variant="contained" color="primary">
               Create
             </Button>
           </Grid>
