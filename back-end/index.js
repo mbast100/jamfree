@@ -176,12 +176,13 @@ app.post("/api/login", (req,res) => {
         if(authData.password === resp.rows[0].password){
             res.send({
                 status: 200,
-                message: "login in successful"
+                message: "login in successful",
+                body: resp.rows,
             });
         } else {
             res.send({
                 status: 403,
-                message: "wrong password"
+                message: "wrong password",
             })
         }
 

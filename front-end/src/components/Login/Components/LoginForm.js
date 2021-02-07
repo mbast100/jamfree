@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
+import { TextField, Grid, makeStyles, Button, Backdrop } from "@material-ui/core";
+import api from "../../../api";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -11,18 +13,28 @@ export default function LoginForm() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const login = () => {
+    setLoading(true);
     if (email && password) {
       let data = {
-        Email: email,
-        Password: password,
+        email: email,
+        password: password,
       };
-      console.log("request data: ", data); // CHANGE TO RETRIEVE PASSWORD AND EMAIL
+      api.login(data).then((res) => {
+        if(res.status === 200){
+          setLoading(false);
+          history.push('/home');
+        }
+      })
     }
   };
+  const loader = loading && <Backdrop/>
   return (
     <div style={{ padding: "20px" }}>
+      {loader}
       <form onSubmit={login}>
         <Grid container direction="column">
           <Grid item className={classes.item}>
