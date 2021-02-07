@@ -20,6 +20,7 @@ const AntTab = withStyles((theme) => ({
     textTransform: "none",
     minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
+    backgroundColor: "#F8F8F8",
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
@@ -51,9 +52,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     margin: "auto",
+    backgroundColor: "#F8F8F8",
   },
   padding: {
-    padding: theme.spacing(3),
+    backgroundColor: "#F8F8F8",
+    padding: theme.spacing(2),
   },
   demo1: {
     backgroundColor: theme.palette.background.paper,

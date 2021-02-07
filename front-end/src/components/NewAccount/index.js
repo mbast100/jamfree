@@ -34,7 +34,7 @@ export default function NewAccount() {
           <MenuTabs onMenuChange={onMenuChange} />
           {NewUserForm}
           {OrgForm}
-          <div>
+          <div style={{paddingBottom:"20px"}}>
             <a href="/login" >sign in?</a>
           </div>
         </Card>`
