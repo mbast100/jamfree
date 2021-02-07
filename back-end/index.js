@@ -167,9 +167,36 @@ app.post("/api/login", (req,res) => {
             return;
         }
         if(resp.rows.length === 0){
-            res.send({
-                status: 403,
-                message: "Email not found"
+            client.query(`SELECT * FROM jamfree.organization WHERE email = '${authData.email}'`, (err2, resp2) => {
+                if(err2){
+                    res.send({
+                        status: "error",
+                        stack: err.stack
+                    });
+                    return;
+                }
+
+                if(resp2.rows.length === 0){
+                    res.send({
+                        status: 403,
+                        message: "email not found"
+                    });
+                    return;
+                }
+                
+                if(authData.password === resp2.rows[0].password){
+                    res.send({
+                        status: 200,
+                        message: "login in successful",
+                        body: resp2.rows[0],
+                        type: 'organization'
+                    });
+                } else {
+                    res.send({
+                        status: 403,
+                        message: "wrong password",
+                    })
+                }
             });
             return;
         }
@@ -177,7 +204,8 @@ app.post("/api/login", (req,res) => {
             res.send({
                 status: 200,
                 message: "login in successful",
-                body: resp.rows,
+                body: resp.rows[0],
+                type: 'user'
             });
         } else {
             res.send({
