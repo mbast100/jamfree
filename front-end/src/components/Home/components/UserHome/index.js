@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 import UserQrCode from "../../../UserQrCode";
 
 export default function UserHome(props) {
-    const {id} = props
-    return (
-        <div>
-            <UserQrCode id={id}/>
-        </div>
-    )
+  const { id, data } = props;
+  return (
+    <div>
+      <h2>User</h2>
+      <div>
+        <UserQrCode id={id} />
+      </div>
+    </div>
+  );
 }

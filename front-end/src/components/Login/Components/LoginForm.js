@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { TextField, Grid, makeStyles, Button, Backdrop } from "@material-ui/core";
+import {
+  TextField,
+  Grid,
+  makeStyles,
+  Button,
+  Backdrop,
+  CircularProgress,
+} from "@material-ui/core";
 import api from "../../../api";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   item: {
     paddingTop: "10px",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
 
@@ -24,14 +36,23 @@ export default function LoginForm() {
         password: password,
       };
       api.login(data).then((res) => {
-        if(res.status === 200){
+        if (res.status === 200) {
           setLoading(false);
-          history.push('/home');
+          Cookies.set('userId', res.data.body.id)
+          Cookies.set('userType', res.data.type)
+
+          history.push("/home");
         }
-      })
+      });
     }
   };
-  const loader = loading && <Backdrop/>
+
+  const loader = loading && (
+    <Backdrop className={classes.backdrop} open={loading}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
+  );
+
   return (
     <div style={{ padding: "20px" }}>
       {loader}
@@ -52,18 +73,17 @@ export default function LoginForm() {
               onChange={(event) => setPassword(event.target.value)}
               value={password}
               fullWidth
-              variant= "outlined"
+              variant="outlined"
               label="Password"
             />
-            </Grid>
-            <Grid item style={{ marginTop: "10px" }}>
+          </Grid>
+          <Grid item style={{ marginTop: "10px" }}>
             <Button onClick={login} variant="contained" color="primary">
-             Sign-in
+              Sign-in
             </Button>
           </Grid>
         </Grid>
       </form>
     </div>
   );
-
 }

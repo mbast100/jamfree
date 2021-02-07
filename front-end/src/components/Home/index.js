@@ -2,25 +2,36 @@ import React, { Component } from "react";
 import UserHome from "./components/UserHome";
 import Navigation from "./components/Navigation";
 import RestaurantHome from "./components/RestaurantHome";
+import api from "../../api";
+import Cookies from "js-cookie";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      usetype: "",
+      usertype: "",
+      data:""
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    api.getUsers(Cookies.get('userId')).then((res) =>{
+      if(res.status === 200){
+        this.setState({data:res.data.body});
+      }
+    })
+    this.setState({userType:Cookies.get('userType')})
+  }
   render() {
-    const { userType } = this.state;
+    const { userType, data } = this.state;
+    const UserHomePage = (userType === "user") && (<UserHome data={data}  />)
+    const OrgHomePage = (userType === "organization") && (<RestaurantHome/>)
+
     return (
       <div>
         <Navigation />
-        <h2>Resto</h2>
-        <UserHome id={this.state.id} />
-        <h1>Resto</h1>
-        <RestaurantHome/>
+        {UserHomePage}
+        {OrgHomePage}
       </div>
     );
   }
