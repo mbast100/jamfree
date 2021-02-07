@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import QrReader from "react-qr-reader";
 import api from "../../api";
 import Cookies from "js-cookie";
+import { v4 as uuidv4 } from 'uuid';
 
 export default class RestaurantQrReader extends Component {
   constructor(props) {
@@ -11,14 +12,23 @@ export default class RestaurantQrReader extends Component {
     this.state = {
       result: [],
       loading: false,
+      response:[],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
+    let response = []
+
+    this.setState({loading:true})
     this.state.result.map((item) => {
-      api.createUserForOrganization(Cookies.get("userId"));
+      let data = {id: item, group_id: uuidv4()}
+      api.createUserForOrganization(Cookies.get("userId"), data).then((res) => {
+        response.push(res.status)
+      });
     });
+    this.setState({loading:false});
+    console.log("response: ", response)
   }
   handleScan = (data) => {
     if (data) {
@@ -43,6 +53,7 @@ export default class RestaurantQrReader extends Component {
     );
     return (
       <div>
+        {loader}
         <QrReader
           delay={300}
           onError={this.handleError}
@@ -52,7 +63,15 @@ export default class RestaurantQrReader extends Component {
         {result.map((item, index) => (
           <p>{item}</p>
         ))}
-        <Button onClick={this.handleSubmit}>Submit</Button>
+        <div style={{ marginTop: "20px" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
     );
   }

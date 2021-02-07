@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 const {Client} = require('pg');
@@ -229,5 +230,5 @@ app.post("/api/login", (req,res) => {
 
     })
 });
-
 app.listen(port, () => console.log("listening on port " +port));
+module.exports.handler = serverless(app);
