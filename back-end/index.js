@@ -138,22 +138,35 @@ app.post('/api/organizations/new', (req,res) => {
 
 app.post('/api/restaurant/:id/users/new', (req,res) => {
     const userData = req.body;
-    var values = [userData.email, userData.first_name, userData.last_name,  userData.phone_number, userData.last_visit,userData.group_id ,userData.id];
-    client.query(`INSERT INTO org_${req.params.id}.users VALUES ($1, $2, $3, $4, $5, $6, $7);`, values, (err) => {
+    client.query(`SELECT * FROM jamfree.users WHERE id = '${userData.id}'`, (err, resp)=>{
         if(err){
             res.send({
-                status: 409,
-                stack: err.stack
+                status: 'error',
+                stack: err.stack()
             });
-            return;
+            return
         }
-        res.send({
-            status: 200,
-            id, 
-            message: "Successfully created new user"
+        const user = resp.rows[0];
+        var last_visit = new Date();
+        last_visit = last_visit.toISOString().slice(0,10)
+        var values = [user.email, user.first_name, user.last_name,  user.phone_number, last_visit ,userData.group_id ,userData.id];
+        client.query(`INSERT INTO org_${req.params.id}.users VALUES ($1, $2, $3, $4, $5, $6, $7);`, values, (err) => {
+            if(err){
+                res.send({
+                    status: 409,
+                    stack: err.stack
+                });
+                return;
+            }
+            res.send({
+                status: 200,
+                id: userData.id,
+                message: "Successfully created new user"
+            });
+    
         });
-
     });
+    
 });
 
 app.post("/api/login", (req,res) => {
