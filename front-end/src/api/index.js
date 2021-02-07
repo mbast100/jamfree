@@ -7,5 +7,6 @@ export default {
     newOrganizationAccount:(data) => {return accounts.createNewUser(data, "organizations")},
     login:(data) => {return users.login(data);},
     getUsers:(id) => {return users.getUser(id);},
-    createUserForOrganization:(id,user) =>{return organizationss.addUser(id,user)}
+    createUserForOrganization:(id,user) =>{return organizationss.addUser(id,user)},
+    getUsers:(id) =>{return organizationss.getUsers(id)},
 }

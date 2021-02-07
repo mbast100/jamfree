@@ -137,7 +137,7 @@ app.post('/api/organizations/new', (req,res) => {
     });
 });
 
-app.post('/api/restaurant/:id/users/new', (req,res) => {
+app.post('/api/organizations/:id/users/new', (req,res) => {
     const userData = req.body;
     client.query(`SELECT * FROM jamfree.users WHERE id = '${userData.id}'`, (err, resp)=>{
         if(err){
