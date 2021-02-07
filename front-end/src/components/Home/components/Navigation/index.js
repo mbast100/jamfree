@@ -82,7 +82,7 @@ export default function Navigation(props) {
       <Toolbar />
       <Container>
         <Box my={2}>
-          {[...new Array(10)]
+          {[...new Array(1)]
             .map(
               () => `Welcome to the JamFam! Thank you for helping save lives!
               Please scan this QR code upon arrival to your favourtie restaurant! Enjoy your visit and stay safe :)`
