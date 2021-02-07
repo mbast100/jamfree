@@ -33,21 +33,23 @@ export default class RestaurantQrReader extends Component {
           api
             .addUserToSquare(dataSquare)
             .then((res) => {
-              if(res.status === 200){alert("User was added!")}
+              if (res.status === 200) {
+                alert("User was added!");
+              }
             })
             .catch((err) => alert(err));
         }
       });
     } else {
       this.setState({ loading: true });
-      this.state.result.map((item) => {
-        let data = { id: item, group_id: uuidv4() };
-        api
-          .createUserForOrganization(Cookies.get("userId"), data)
-          .then((res) => {
-            response.push(res.status);
-          });
-      });
+      api
+        .createUserForOrganization(Cookies.get("userId"), {
+          id: this.state.result[0],
+          group_id: uuidv4(),
+        })
+        .then((res) => {
+          response.push(res.status);
+        });
       this.setState({ loading: false });
       console.log("response: ", response);
     }
