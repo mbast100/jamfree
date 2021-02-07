@@ -1,5 +1,6 @@
 import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
 import React from "react";
+import api from "../../../api";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -24,7 +25,9 @@ export default function UserForm() {
         phone_number: phoneNumber,
         password: password,
       };
-      console.log("request data: ", data);
+      api.newUserAccount(data).then((res) => {
+        console.log(res.data)
+      })
     }
   };
   return (
@@ -64,6 +67,15 @@ export default function UserForm() {
               value={phoneNumber}
               fullWidth
               label="Phone Number"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item item className={classes.item}>
+            <TextField
+              onChange={(event) => setPassword(event.target.value)}
+              value={password}
+              fullWidth
+              label="Password"
               variant="outlined"
             />
           </Grid>

@@ -1,7 +1,7 @@
 
 import requests from "../helper/http";
 
-const endpoint = "http"
+const endpoint = "http://localhost:3001"
 
 const accounts = {
     createNewUser:(data, type)=>{
