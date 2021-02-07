@@ -1,10 +1,11 @@
 const express = require('express');
-const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 const {Client} = require('pg');
 const uniqid = require('uniqid');
 const cors = require('cors');
+const axios = require('axios');
+const serverless = require('serverless-http');
 
 
 connectionString = 'postgres://kyrellos:BUrJN6v87zMhsxlf@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert='+ __dirname + '/cert/cc-ca.crt&options=--cluster=unripe-monkey-509';
@@ -137,7 +138,7 @@ app.post('/api/organizations/new', (req,res) => {
     });
 });
 
-app.post('/api/organizations/:id/users/new', (req,res) => {
+app.post('/api/restaurant/:id/users/new', (req,res) => {
     const userData = req.body;
     client.query(`SELECT * FROM jamfree.users WHERE id = '${userData.id}'`, (err, resp)=>{
         if(err){
@@ -230,5 +231,19 @@ app.post("/api/login", (req,res) => {
 
     })
 });
+
+app.post("/api/square", (req, res) => {
+    axios.post('https://connect.squareup.com/v2/customers', req.body, {
+        headers: {
+            Authorization: 'Bearer EAAAEOFSCGxjBF72bnSbhA-VzVNbjRw1zp8sXJiJAQHmc40ZPBzLmcqZLLwIej6t'
+        }
+    }).then((response) => {
+        res.send(response.data);
+        
+      }, (error) => {
+        res.send(error);
+      });
+});
+
 app.listen(port, () => console.log("listening on port " +port));
 module.exports.handler = serverless(app);

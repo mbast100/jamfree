@@ -24,7 +24,9 @@ export default function DisplayUsers() {
       {temp.map((item, index) => (
         <div key={index}>
           <ul>
-            <li>{JSON.stringify(item)}</li>
+            <li>{JSON.stringify(item.first_name)}</li>
+            <li>{JSON.stringify(item.last_name)}</li>
+            <li>{JSON.stringify(item.email)}</li>
           </ul>
         </div>
       ))}

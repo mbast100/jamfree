@@ -19,7 +19,7 @@ export default function UserForm() {
   const submit = () => {
     if (firstName && lastName && email && phoneNumber) {
       let data = {
-        frist_name: firstName,
+        first_name: firstName,
         last_name: lastName,
         email: email,
         phone_number: phoneNumber,
