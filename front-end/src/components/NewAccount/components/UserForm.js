@@ -2,6 +2,7 @@ import { TextField, Grid, makeStyles, Button } from "@material-ui/core";
 import React from "react";
 import api from "../../../api";
 import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -28,7 +29,12 @@ export default function UserForm() {
         password: password,
       };
       api.newUserAccount(data).then((res) => {
-        console.log(res.data)
+        if (res.status === 200) {
+          Cookies.set('userId', res.data.id)
+          Cookies.set('userType', 'organization')
+          history.push('/login')
+        }
+
       })
     }
   };
@@ -83,7 +89,7 @@ export default function UserForm() {
             />
           </Grid>
           <Grid item style={{ marginTop: "20px" }}>
-            <Button onClick={submit} onClick={()=>history.push('/login')} variant="contained" color="primary">
+            <Button onClick={submit} variant="contained" color="primary">
               Create
             </Button>
           </Grid>
