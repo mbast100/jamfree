@@ -154,5 +154,36 @@ app.post('/api/restaurant/:id/users/new', (req,res) => {
     });
 });
 
+app.post("/api/login", (req,res) => {
+    const authData = req.body;
+    client.query(`SELECT * FROM jamfree.users WHERE email = '${authData.email}'`, (err, resp) => {
+        if(err){
+            res.send({
+                status: "error",
+                stack: err.stack
+            });
+            return;
+        }
+        if(resp.rows.length === 0){
+            res.send({
+                status: 403,
+                message: "Email not found"
+            });
+            return;
+        }
+        if(authData.password === resp.rows[0].password){
+            res.send({
+                status: 200,
+                message: "login in successful"
+            });
+        } else {
+            res.send({
+                status: 403,
+                message: "wrong password"
+            })
+        }
+
+    })
+});
 
 app.listen(port, () => console.log("listening on port " +port));
