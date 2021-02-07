@@ -36,7 +36,7 @@ export default function LoginForm() {
         password: password,
       };
       api.login(data).then((res) => {
-        if (res.status === 200) {
+        if (res.data.status === 200) {
           setLoading(false);
           Cookies.set('userId', res.data.body.id)
           Cookies.set('userType', res.data.type)

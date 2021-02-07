@@ -55,9 +55,19 @@ export default class RestaurantQrReader extends Component {
     }
   }
   handleScan = (data) => {
+    console.log(data)
     if (data) {
+      let newResult = this.state.result;
+      console.log("IN HERERERE: ", data)
+      if (this.state.result.length === 0) {
+        this.setState({
+          result: [data],
+        });
+      } else if (newResult.indexOf(data) === -1) {
+        newResult.push(data);
+      }
       this.setState({
-        result: [data],
+        result: newResult
       });
     }
   };

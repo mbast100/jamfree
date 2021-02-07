@@ -6,7 +6,7 @@ export default function UserHome(props) {
   return (
     <div>
       <h2>User</h2>
-      <div>
+      <div style={{paddingBottom:"20px"}}>
         <UserQrCode />
       </div>
     </div>
