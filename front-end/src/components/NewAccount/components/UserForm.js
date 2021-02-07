@@ -72,6 +72,7 @@ export default function UserForm() {
           </Grid>
           <Grid item item className={classes.item}>
             <TextField
+              type="password"
               onChange={(event) => setPassword(event.target.value)}
               value={password}
               fullWidth
