@@ -33,7 +33,7 @@ export default class RestaurantQrReader extends Component {
           api
             .addUserToSquare(dataSquare)
             .then((res) => {
-              console.log(res);
+              if(res.status === 200){alert("User was added!")}
             })
             .catch((err) => alert(err));
         }

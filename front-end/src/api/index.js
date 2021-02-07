@@ -10,5 +10,5 @@ export default {
     getUsers:(id) => {return users.getUser(id);},
     createUserForOrganization:(id,user) =>{return organizationss.addUser(id,user)},
     getUsersForOrganizations:(id) =>{return organizationss.getUsers(id)},
-    addUserToSquare: (data) =>{return square.addUser(data);},
+    addUserToSquare: (data) =>{return square.addUserV2(data);},
 }
