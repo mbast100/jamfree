@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UserHome from "./components/UserHome";
 import Navigation from "./components/Navigation";
+import RestaurantHome from "./components/RestaurantHome";
 
 export default class Home extends Component {
   constructor(props) {
@@ -16,7 +17,10 @@ export default class Home extends Component {
     return (
       <div>
         <Navigation />
-        <UserHome />
+        <h2>Resto</h2>
+        <UserHome id={this.state.id} />
+        <h1>Resto</h1>
+        <RestaurantHome/>
       </div>
     );
   }

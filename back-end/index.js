@@ -6,7 +6,7 @@ const uniqid = require('uniqid');
 const cors = require('cors');
 
 
-connectionString = 'postgres://kyrellos:BUrJN6v87zMhsxlf@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert='+ __dirname + '\\cert/cc-ca.crt&options=--cluster=unripe-monkey-509';
+connectionString = 'postgres://kyrellos:BUrJN6v87zMhsxlf@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert='+ __dirname + '/cert/cc-ca.crt&options=--cluster=unripe-monkey-509';
 
 const port = 3001;
 app.use(bodyParser.urlencoded({ extended: false }));
