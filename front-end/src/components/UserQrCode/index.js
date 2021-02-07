@@ -12,14 +12,13 @@ export default class UserQrCode extends Component {
     };
   }
   componentDidMount(){
-    this.setState({id:this.props.id})
     this.setState({value:Cookies.get('userId')})
   }
   render() {
-    const { value , id} = this.state;
+    const { value} = this.state;
     return (
       <div style={{padding:"20px"}}>
-        <QRCode size={200} value={value+id} />
+        <QRCode size={200} value={value} />
       </div>
     );
   }

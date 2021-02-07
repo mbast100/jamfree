@@ -1,5 +1,6 @@
 import accounts from "./accounts"
 import organizationss from "./organizations";
+import square from "./square";
 import users from "./users";
 
 export default {
@@ -8,5 +9,6 @@ export default {
     login:(data) => {return users.login(data);},
     getUsers:(id) => {return users.getUser(id);},
     createUserForOrganization:(id,user) =>{return organizationss.addUser(id,user)},
-    getUsers:(id) =>{return organizationss.getUsers(id)},
+    getUsersForOrganizations:(id) =>{return organizationss.getUsers(id)},
+    addUserToSquare: (data) =>{return square.addUser(data);},
 }
